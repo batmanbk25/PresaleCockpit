@@ -3,8 +3,8 @@
 {
 "FROM":
 [
-"/PSIF/SLS_HDR",
-"/PSIF/SLS_TREEN"
+"ZTB_SLS_HDR",
+"ZTB_SLS_TREEN"
 ],
 "ASSOCIATED":
 [],

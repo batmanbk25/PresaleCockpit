@@ -3,7 +3,7 @@
 {
 "FROM":
 [
-"/PSIF/SLS_ITEM"
+"ZTB_SLS_ITEM"
 ],
 "ASSOCIATED":
 [],

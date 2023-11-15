@@ -4,7 +4,7 @@
 "FROM":
 [
 "ZI_SLS_HDR_PNODE",
-"/PSIF/SLS_HDR"
+"ZTB_SLS_HDR"
 ],
 "ASSOCIATED":
 [

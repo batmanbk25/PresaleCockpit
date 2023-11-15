@@ -3,7 +3,8 @@
 @AbapCatalog.preserveKey: true
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Presale Header'
-define view ZI_SLS_HEADER as select from /psif/sls_hdr
+define view ZI_SLS_HEADER as select from ztb_sls_hdr  --/psif/sls_hdr
+--define view ZI_SLS_HEADER as select from /psif/sls_hdr
   association [1..1] to ZI_SLS_HDR_PNODE as _PNode on $projection.Presale_Document = _PNode.Presale_Document
 { 
   key presales_no   as Presale_Document,  

@@ -8,7 +8,7 @@
     dataClass: #MIXED
 }
 define view entity ZI_SLS_ITEM
-  as select from /psif/sls_item 
+  as select from ztb_sls_item --/psif/sls_item 
 {
       @UI.facet: [
       { id:     'Items',

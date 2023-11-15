@@ -7,8 +7,8 @@
     sizeCategory: #S,
     dataClass: #MIXED
 }
-define view entity ZI_SLS_HDR_PNODE as select from /psif/sls_hdr
-association [0..1] to /psif/sls_treen as _TreeNode 
+define view entity ZI_SLS_HDR_PNODE as select from ztb_sls_hdr  --/psif/sls_hdr
+association [0..1] to ztb_sls_treen  as _TreeNode  --/psif/sls_treen
  on $projection./psif/type = _TreeNode.presaletype and $projection./psif/status = _TreeNode.pstatus 
 {
   key presales_no as Presale_Document,

@@ -8,7 +8,7 @@
     dataClass: #MIXED
 }
 define root view entity ZI_SLS_TREENODES
-  as select from /psif/sls_treen 
+  as select from ztb_sls_treen --/psif/sls_treen 
 { 
   key nodeid         as NodeID,
       parentsid      as ParentsID,
