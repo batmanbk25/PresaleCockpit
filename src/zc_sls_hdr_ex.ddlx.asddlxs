@@ -1,0 +1,194 @@
+@Metadata.layer: #CORE
+
+@UI: { headerInfo: { typeName: 'Presale Cockpit Suite: Presale Document',
+                     title: { label: 'Presale Document' }, // Defines the value shown in title section
+                     description: { value: 'Presale_Document' },
+                     typeNamePlural: 'List Presale Documents'
+                   },
+                   badge.headLine.value : 'Presale_Document'
+     }
+annotate entity ZC_SLS_HDR with
+{
+
+  @UI.facet: [
+  { id:     'Header1',
+  purpose:  #HEADER,
+  type:     #FIELDGROUP_REFERENCE,
+  //label:    'Header',
+  targetQualifier: '_Header1',
+  position: 10 },
+  { id:     'Header2',
+  purpose:  #HEADER,
+  type:     #FIELDGROUP_REFERENCE,
+  targetQualifier: '_Header2',
+  position: 20 },
+  { id:     'Header3',
+  purpose:  #HEADER,
+  type:     #FIELDGROUP_REFERENCE,
+  targetQualifier: '_Header3',
+  position: 30 },
+
+  {id: 'Header',
+  purpose: #STANDARD,
+  type: #COLLECTION,
+  label: 'Header',
+  position: 10 },
+
+  { id:     'POInfo',
+  purpose:  #STANDARD,
+  type:     #FIELDGROUP_REFERENCE ,
+  //type:     #IDENTIFICATION_REFERENCE,
+  label:    'Purchase Order Data',
+  targetQualifier: '_POInfo',
+  position: 40 ,parentId: 'Header'},
+  { id:     'SOInfo',
+  purpose:  #STANDARD,
+  type:     #FIELDGROUP_REFERENCE ,
+  label:    'Sales Order Data',
+  targetQualifier: '_SOInfo',
+  position: 42,
+  parentId: 'Header' },
+  { id:     'HOtherInfo',
+  purpose:  #STANDARD,
+  type:     #FIELDGROUP_REFERENCE ,
+  //type:     #IDENTIFICATION_REFERENCE,
+  label:    'Other Information',
+  targetQualifier: '_HOtherInfo',
+  position: 44,parentId: 'Header' },
+
+  {id: 'PartnerTab',
+  purpose: #STANDARD,
+  type: #COLLECTION,
+  label: 'Partners',
+  position: 20 },
+
+  {id: 'ItemTab',
+  purpose: #STANDARD,
+  type: #COLLECTION,
+  label: 'Items',
+  position: 20 },
+
+  { id:     'Items',
+  purpose:  #STANDARD,
+  type:     #LINEITEM_REFERENCE,
+  label:    'Items',
+  position: 50,
+  parentId: 'ItemTab',
+  //targetQualifier: '_QItems',
+  targetElement: '_Items' },
+  { id:     'Partners',
+  purpose:  #STANDARD,
+  type:     #LINEITEM_REFERENCE,
+  label:    'Partners',
+  position: 60,
+  //targetQualifier: '_QItems',
+  parentId: 'PartnerTab',
+  targetElement: '_Partners' }
+  ]
+
+  @UI.fieldGroup: [{ position: 10, qualifier: '_Header1', label: 'Presale Document' }]
+  @UI.identification: [
+                    { importance: #HIGH, type: #FOR_ACTION, position: 1, dataAction: 'MPC_EXT:HDRPARK', label: 'Park', iconUrl: 'notes', invocationGrouping: #ISOLATED  },
+                    { importance: #HIGH, type: #FOR_ACTION, position: 2, dataAction: 'MPC_EXT:HDRPOST',  label: 'Post', iconUrl: 'sap-icon://accounting-document-verification' },
+                    { importance: #HIGH, type: #FOR_ACTION, position: 3, dataAction: 'MPC_EXT:HDRCHECK',  label: 'Check' },
+                    { importance: #HIGH, type: #FOR_ACTION, position: 4, dataAction: 'MPC_EXT:HDRREFRESH',  label: 'Refresh' },
+                    { importance: #HIGH, type: #FOR_ACTION, position: 5, dataAction: 'MPC_EXT:HDRWOPT',  label: 'Weight Optimization' },
+                    { importance: #HIGH, type: #FOR_ACTION, position: 6, dataAction: 'MPC_EXT:HDRDPLNT',  label: 'Determine Plant' },
+                    { importance: #HIGH, type: #FOR_ACTION, position: 7, dataAction: 'MPC_EXT:HDRDSAVETMPL',  label: 'Save Template' },
+                    { importance: #HIGH, type: #FOR_ACTION, position: 8, dataAction: 'BOPF:PARK', label: 'Park' }
+//                    { importance: #HIGH,  type: #FOR_ACTION, dataAction: 'BOPF:POST', label: 'Post' }
+                    
+                    ]
+  @EndUserText.quickInfo: 'Presale_Document Number'
+  @Consumption.valueHelpDefinition: [{  entity: {   name: '/PSIF/I_SLS_HEADER',
+                        element:    'presales_no' } }]
+  @Search.fuzzinessThreshold: 0.7
+  @Search.defaultSearchElement: true
+  @UI.selectionField: [ { position: 10 } ]
+  @UI: { lineItem: [ { position: 10, label: 'Presale Document' }] }
+  Presale_Document;
+
+  @UI.selectionField: [ { position: 20 } ]
+  //@ObjectModel.text.element: [ '/psif/type_t' ]
+  @UI.fieldGroup: [{ position: 20, qualifier: '_Header3', label: 'Presale Type' }]
+  //@UI.lineItem: [ { position: 30, label: 'Presale type' } ]
+  Presale_Type;
+  ///psif/type_t,
+
+  @UI.selectionField: [ { position: 30 } ]
+  @UI.fieldGroup: [{ position: 10, qualifier: '_POInfo', label: 'Purchase Order' }]
+  @Search.defaultSearchElement: true
+  @UI.lineItem: [ { position: 20, label: 'Purchase Order' } ]
+  @UI: { identification:[ { position: 20, label: 'Purchase Order' } ]}
+  PO_Number;
+
+  @UI.fieldGroup: [{ position: 20, qualifier: '_POInfo', label: 'PO Type' }]
+  @Consumption.valueHelpDefinition: [{  entity: {   name: '/PSIF/I_SLS_HEADER',
+                        element:    'bsark' } }]
+  PO_Type;
+  @UI.fieldGroup: [{ position: 30, qualifier: '_POInfo', label: 'PO Date' }]
+  PO_Date;
+
+
+  @UI.selectionField: [ { position: 40 } ]
+  @UI.fieldGroup: [{ position: 10, qualifier: '_SOInfo', label: 'Sales Order' }]
+  @UI.lineItem: [ { position: 40, label: 'Sales Order' } ]
+  SO_Number;
+
+  @UI.fieldGroup: [{ position: 20, qualifier: '_SOInfo', label: 'Sales Order Type' }]
+  @UI.lineItem: [ { position: 80, label: 'Sales Order Type' } ]
+  SO_Type;
+  //      @UI.lineItem: [ {  position: 90, label: 'Request Delivery Date' } ]
+  //      @UI.fieldGroup: [{ position: 30, qualifier: '_SOInfo', label: 'Request Delivery Date' }]
+  //request_delivery_date;
+
+  @UI.lineItem: [ {  position: 100, label: 'Gross Total Weight' } ]
+  @UI.fieldGroup: [{ position: 40, qualifier: '_SOInfo', label: 'Gross Total Weight' }]
+  Gross_Total_Weight;
+
+  @UI.lineItem: [ {  position: 110, label: 'Sales Organization' } ]
+  @UI.fieldGroup: [{ position: 60, qualifier: '_SOInfo', label: 'Sales Organization' }]
+  Sales_Organization;
+  @UI.lineItem: [ {  position: 120, label: 'Distribution Chanel' } ]
+  @UI.fieldGroup: [{ position: 70, qualifier: '_SOInfo', label: 'Distribution Chanel' }]
+  Distribution_Chanel;
+  @UI.lineItem: [ {  position: 130, label: 'Division' } ]
+  @UI.fieldGroup: [{ position: 80, qualifier: '_SOInfo', label: 'Division' }]
+  Division;
+
+  @UI.lineItem: [ {  position: 140, label: 'Budget Code' } ]
+  @UI.fieldGroup: [{ position: 90, qualifier: '_SOInfo', label: 'Budget Code' }]
+  Budget_Code;
+
+  @UI.selectionField: [ { position: 50 } ]
+  @UI.lineItem: [ { position: 150, label: 'Customer' } ]
+  @UI: { identification:[ { qualifier: '_Header', position: 150, label: 'Customer' } ]}
+  Customer;
+
+  @UI.fieldGroup: [{ position: 10, qualifier: '_HOtherInfo', label: 'Promo Code' }]
+  @UI.lineItem: [ { position: 170, label: 'Promotion' } ]
+  Promo_Code;
+  @UI.fieldGroup: [{ position: 20, qualifier: '_HOtherInfo', label: 'Your Reference' }]
+  @UI.lineItem: [ { position: 180, label: 'Your Reference' } ]
+  Your_Reference;
+
+  @UI.fieldGroup: [{ position: 30, qualifier: '_HOtherInfo', label: 'Event' }]
+  @UI.lineItem: [ { position: 190, label: 'Event' } ]
+  Event;
+
+  @UI.fieldGroup: [{ position: 40, qualifier: '_HOtherInfo', label: 'Brand' }]
+  @UI.lineItem: [ { position: 190, label: 'Brand' } ]
+  Brand;
+
+  @UI.fieldGroup: [{ position: 50, qualifier: '_HOtherInfo', label: 'Season Code' }]
+  @UI.lineItem: [ { position: 200, label: 'Season Code' } ]
+  Season_Code;
+
+  @UI.fieldGroup: [{ position: 40, qualifier: '_Header1', label: 'Status' }]
+  Status;
+  @UI.fieldGroup: [{ position: 10, qualifier: '_Header2', label: 'Name' }]
+  /psif/name;
+  @UI.fieldGroup: [{ position: 10, qualifier: '_Header3', label: 'Description' }]
+  /psif/description;
+
+}
